@@ -1,14 +1,29 @@
-name: 'First interaction'
-description: 'Greet new contributors when they create their first issue or open their first pull request'
-author: 'GitHub'
-inputs:
-  repo-token:
-    description: 'Token for the repository. Can be passed in using {{ secrets.GITHUB_TOKEN }}'
-    required: true
-  issue-message:
-    description: 'Comment to post on an individual''s first issue'
-  pr-message:
-    description: 'Comment to post on an individual''s first pull request'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate a sine wave
+frequency = 440  # Frequency of the note C4(440 Hz)
+duration =5  # Duration of the note in seconds
+sampling_rate = 44100  # Number of samples per second (standard for audio)
+t = np.linspace(0, duration, int(duration * sampling_rate), endpoint=False)
+note = np.sin(2 * np.pi * frequency * t)
+
+# Apply an bass drum to the note
+bass drum = np.linspace(0, 1, int(duration * sampling_rate))
+note *= bass drum
+
+# Add some synth keyboard to the note
+synth keyboard = np.sin(2 * np.pi * 2 * frequency * t) * 0.3 + np.sin(2 * np.pi * 3 * frequency * t) * 0.1
+note += synth keyboard 
+
+# Normalize the note to prevent clipping
+note /= np.max(np.abs(note))
+
+# Plot the waveform
+plt.plot(t, note)
+plt.xlabel('Time (s)')
+plt.ylabel('Amplitude')
+plt.title('Generated Note')
+plt.show()
+```
